@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ML Tax Estimator</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 40px; background-color: #f9f9f9; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; }
+        label { font-weight: bold; }
+        .result { margin-top: 20px; padding: 15px; background: #eef; border-radius: 8px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Tax Estimator (ML Model)</h1>
+    <form method="post">
+        <label for="filing_status">Filing Status:</label><br>
+        <select name="filing_status" required>
+            <option value="single">Single</option>
+            <option value="married">Married</option>
+        </select><br><br>
+
+        <label>Enter Income:</label><br>
+        <input type="number" name="income" min="0" step="any" required>
+        <select name="income_type">
+            <option value="yearly">Per Year</option>
+            <option value="monthly">Per Month</option>
+        </select><br><br>
+
+        <label>Deductions (max $15,000):</label><br>
+        <input type="range" id="deductions" name="deductions" min="0" max="15000" value="0" step="10"
+               oninput="this.nextElementSibling.value = this.value">
+        <output>0</output><br><br>
+
+        <button type="submit">Calculate Tax</button>
+    </form>
+
+    {% if estimated_tax is not none %}
+    <div class="result">
+        <p><strong>Adjusted Gross Income (AGI):</strong> ${{ agi }}</p>
+        <p><strong>Estimated Tax (Predicted by ML):</strong> ${{ estimated_tax }}</p>
+        <p><strong>Effective Tax Rate:</strong> {{ effective_rate }}%</p>
+    </div>
+    {% endif %}
+</div>
+</body>
+</html>
