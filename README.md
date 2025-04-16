@@ -2,4 +2,4 @@ To run this project you need to generate the job.lib file to do that run the mod
 
 also remember to install Flask using pip install flask 
 
-This project is not financial advice Users are adviced to verify resuluts with professionals
+This project is not financial advice Users are adviced to verify results with professionals
